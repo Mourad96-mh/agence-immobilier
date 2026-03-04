@@ -1,0 +1,284 @@
+
+/* =====================================================
+   RESPONSIVE — COMPREHENSIVE OVERHAUL
+   ===================================================== */
+
+/* ── Burger button ── */
+.burger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  color: white;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.burger-btn:hover { background: rgba(255,255,255,0.15); }
+
+/* ── Mobile menu ── */
+.mobile-menu-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 98;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: rgba(10, 25, 55, 0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 0 20px;
+  flex-direction: column;
+  animation: mobileMenuIn 0.22s ease;
+}
+@keyframes mobileMenuIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mobile-nav-link {
+  display: block;
+  padding: 14px 24px;
+  color: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: color var(--transition), background var(--transition);
+}
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--accent);
+  background: rgba(255,255,255,0.05);
+}
+.mobile-menu-footer {
+  padding: 20px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mobile-menu-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.85rem;
+  transition: color var(--transition);
+}
+.mobile-menu-contact:hover { color: var(--accent); }
+
+/* ── Show burger / hide desktop nav ── */
+@media (max-width: 900px) {
+  .nav { gap: 16px; }
+  .nav-link { font-size: 0.82rem; }
+}
+
+@media (max-width: 768px) {
+  .burger-btn { display: flex; }
+  .mobile-menu-backdrop { display: block; }
+  .mobile-menu { display: flex; }
+  .container { padding: 0 16px; }
+  .logo-img { height: 38px; }
+}
+
+/* ── Filter bar ── */
+@media (max-width: 768px) {
+  .filter-inner { gap: 8px; padding: 10px 12px; }
+  .filter-group { width: calc(50% - 4px); }
+  .filter-select,
+  .filter-input { width: 100%; min-width: unset; font-size: 0.85rem; padding: 8px 10px; }
+  .filter-results-wrap { width: 100%; justify-content: space-between; }
+}
+@media (max-width: 480px) {
+  .filter-group { width: 100%; }
+}
+
+/* ── Properties grid ── */
+@media (max-width: 640px) {
+  .properties-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .card-body { padding: 14px; }
+  .card-price { font-size: 1.1rem; }
+}
+
+/* ── Hero ── */
+@media (max-width: 768px) {
+  .hero { min-height: 85vh; }
+  .hero-content { padding: 36px 16px; }
+  .hero-search-row { flex-direction: column; gap: 10px; }
+  .hero-search-input,
+  .hero-search-btn { width: 100%; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .hero-stats { gap: 16px; }
+  .hero-stat-value { font-size: 1.6rem; }
+  .page-hero { padding: 56px 0 36px; }
+  .page-hero-title { font-size: 1.5rem; }
+}
+
+/* ── Agency stats ── */
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+
+/* ── Sell section ── */
+@media (max-width: 640px) {
+  .sell-grid { grid-template-columns: 1fr; }
+  .sell-card { padding: 28px 20px; }
+}
+
+/* ── How it works ── */
+@media (max-width: 768px) {
+  .hiw-grid { grid-template-columns: 1fr; gap: 20px; }
+  .hiw-card { padding: 28px 20px; }
+}
+
+/* ── Why us ── */
+@media (max-width: 640px) {
+  .whyus-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ── Alert section ── */
+@media (max-width: 640px) {
+  .alert-form { flex-direction: column; gap: 10px; }
+  .alert-input,
+  .alert-btn { width: 100%; }
+}
+
+/* ── Testimonials ── */
+@media (max-width: 640px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Contact section ── */
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ── Estimate / Owner form ── */
+@media (max-width: 640px) {
+  .estimate-section { padding: 48px 0; }
+  .btn-estimate-submit { font-size: 0.9rem; padding: 14px 20px; }
+}
+
+/* ── Footer ── */
+@media (max-width: 480px) {
+  .footer { padding: 48px 0 24px; }
+  .footer-bottom { font-size: 0.8rem; text-align: center; }
+}
+
+/* ── Property modal ── */
+@media (max-width: 480px) {
+  .modal-content { margin: 8px; }
+  .modal-body { padding: 16px; }
+}
+
+/* ── Toast — small phones ── */
+@media (max-width: 480px) {
+  .toast {
+    bottom: 16px;
+    min-width: unset;
+    width: calc(100vw - 32px);
+    font-size: 0.875rem;
+    padding: 12px 14px;
+  }
+}
+
+/* =====================================================
+   ADMIN — RESPONSIVE
+   ===================================================== */
+
+/* Admin topbar */
+@media (max-width: 640px) {
+  .admin-topbar {
+    padding: 8px 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+  }
+  .admin-brand { font-size: 0.9rem; }
+  .admin-nav-tabs { gap: 2px; }
+  .admin-nav-tab { padding: 6px 10px; font-size: 0.8rem; }
+  .admin-topbar-right span { display: none; }
+}
+
+/* Admin stats */
+@media (max-width: 900px) {
+  .admin-stats { grid-template-columns: repeat(3, 1fr); padding: 16px 20px 0; }
+}
+@media (max-width: 640px) {
+  .admin-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px 12px 0; }
+  .admin-stat-card { padding: 14px 16px; }
+  .admin-stat-number { font-size: 1.6rem; }
+}
+
+/* Admin filters */
+@media (max-width: 768px) {
+  .admin-filters { flex-wrap: wrap; gap: 8px; padding: 12px 12px 0; margin: 0; }
+  .admin-select { flex: 1; min-width: 130px; font-size: 0.82rem; }
+}
+@media (max-width: 480px) {
+  .admin-select { width: 100%; flex: unset; }
+  .admin-add-btn { width: 100%; justify-content: center; margin-left: 0; }
+}
+
+/* Admin table — scrollable + compact */
+@media (max-width: 768px) {
+  .admin-table-wrapper { margin: 12px 12px 0; border-radius: var(--radius-sm); }
+  .admin-table th,
+  .admin-table td { padding: 10px 10px; font-size: 0.8rem; }
+  .admin-td-details { max-width: 120px; }
+}
+
+/* Hide less critical columns on small phones */
+@media (max-width: 580px) {
+  .admin-table th:nth-child(4),
+  .admin-table td:nth-child(4),
+  .admin-table th:nth-child(5),
+  .admin-table td:nth-child(5) { display: none; }
+  .admin-table th,
+  .admin-table td { padding: 8px 8px; font-size: 0.78rem; }
+  .admin-status-select { font-size: 0.75rem; padding: 3px 6px; }
+  .admin-delete-btn { padding: 4px 8px; font-size: 0.72rem; }
+}
+@media (max-width: 500px) {
+  .admin-table th:nth-child(1),
+  .admin-table td:nth-child(1),
+  .admin-table th:nth-child(6),
+  .admin-table td:nth-child(6) { display: none; }
+}
+
+/* Admin form modal */
+@media (max-width: 640px) {
+  .modal-overlay { align-items: flex-end; }
+  .admin-modal {
+    border-radius: var(--radius) var(--radius) 0 0;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .modal-row { flex-direction: column; gap: 12px; }
+  .modal-header { padding: 16px 16px 12px; }
+  .modal-body { padding: 0 16px 16px; }
+}
+
+/* Admin login */
+@media (max-width: 480px) {
+  .admin-login-card { padding: 28px 20px; margin: 16px; }
+}
+
+/* Admin page bottom padding */
+@media (max-width: 640px) {
+  .admin-page { padding-bottom: 32px; }
+  .admin-loading,
+  .admin-empty { padding: 32px 16px; }
+}

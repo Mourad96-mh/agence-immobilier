@@ -1,0 +1,9 @@
+{
+  "name": "mecalus-immobilier",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && node server.js",
+    "seed": "cd backend && node seed.js"
+  }
+}
