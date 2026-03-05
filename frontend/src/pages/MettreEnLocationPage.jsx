@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MessageCircle, CheckCircle } from 'lucide-react'
+import useSEO from '../hooks/useSEO'
 import PageHero from '../components/PageHero'
 import ContactSection from '../components/ContactSection'
 import { useLanguage } from '../context/LanguageContext'
@@ -10,6 +11,11 @@ import { AGENCY } from '../config'
 const EMPTY_FORM = { type: '', city: '', area: '', name: '', phone: '', email: '', notes: '' }
 
 export default function MettreEnLocationPage() {
+  useSEO({
+    title: 'Mettre en location votre bien immobilier | Gestion locative Marrakech & Casablanca | Mecalus',
+    description: "Confiez la gestion locative de votre bien à Mecalus. Mise en location rapide et suivi professionnel à Marrakech et Casablanca. Réponse sous 24h.",
+    canonical: 'https://mecalus.ma/mettre-en-location',
+  })
   const { t } = useLanguage()
   const { showToast } = useToast()
   const navigate = useNavigate()
@@ -95,13 +101,16 @@ export default function MettreEnLocationPage() {
                   </div>
                   <div>
                     <label className="filter-label">{t('ownerForm.city')}</label>
-                    <input
+                    <select
                       className="form-input"
-                      type="text"
                       value={form.city}
                       onChange={(e) => set('city', e.target.value)}
                       required
-                    />
+                    >
+                      <option value="">— Choisir —</option>
+                      <option value="Marrakech">Marrakech</option>
+                      <option value="Casablanca">Casablanca</option>
+                    </select>
                   </div>
                 </div>
 

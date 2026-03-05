@@ -5,8 +5,10 @@ export const AGENCY = {
   whatsapp: "212779361548", // without + for wa.me links
   whatsappDisplay: "+212 6 02055165",
   phoneDisplay: "+212 7 79361548",
-  email: "contact@mecalus.ma",
-  address: "N°52 Massrour 1, Appt N°53 — Témara, Maroc",
-  facebook: "https://www.facebook.com/share/18K7s8ECdX/",
+  email: "alilagrari2018@gmail.com.ma",
+  address: "Gueliz — Marrakech, Maroc",
+  facebook: "https://www.facebook.com/share/1CHHWHe5iW/?mibextid=wwXIfr",
   instagram: "https://www.instagram.com/alilg010?igsh=ZHY2YTJvOWxydWxy",
+  linkedIn:
+    "https://www.linkedin.com/in/abdelmouttalib-lagrari-316988233?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
 };

@@ -1,14 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ImmoMaroc — Agence Immobilière</title>
-    <meta name="description" content="Trouvez votre bien immobilier idéal au Maroc. Appartements, villas, bureaux, terrains à vendre ou à louer." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Primary SEO -->
+    <title>
+      Mecalus — Agence Immobilière à Marrakech &amp; Casablanca | Vente &amp;
+      Location
+    </title>
+    <meta
+      name="description"
+      content="Mecalus, votre agence immobilière de confiance à Marrakech et Casablanca. Achat, vente et location d'appartements, villas, maisons, fermes, terrains et bureaux au Maroc. Estimation gratuite sous 24h."
+    />
+    <meta
+      name="keywords"
+      content="agence immobilière Marrakech, agence immobilière Casablanca, vente appartement Marrakech, location villa Casablanca, acheter villa Marrakech, gestion locative Marrakech, immobilier Maroc, Mecalus"
+    />
+    <meta name="author" content="Mecalus" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mecalus.ma/" />
+
+    <!-- Open Graph (Facebook / LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mecalus" />
+    <meta
+      property="og:title"
+      content="Mecalus — Agence Immobilière à Marrakech &amp; Casablanca"
+    />
+    <meta
+      property="og:description"
+      content="Achat, vente et location d'appartements, villas, maisons, fermes, terrains et bureaux à Marrakech et Casablanca. Estimation gratuite sous 24h."
+    />
+    <meta property="og:url" content="https://mecalus.ma/" />
+    <meta property="og:image" content="https://mecalus.ma/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="fr_MA" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Mecalus — Agence Immobilière à Marrakech &amp; Casablanca"
+    />
+    <meta
+      name="twitter:description"
+      content="Achat, vente et location d'appartements, villas, maisons et bureaux à Marrakech et Casablanca."
+    />
+    <meta name="twitter:image" content="https://mecalus.ma/logo.png" />
+
+    <!-- Geo targeting -->
+    <meta name="geo.region" content="MA" />
+    <meta name="geo.placename" content="Marrakech, Casablanca" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://mecalus.ma/#organization",
+            "name": "Mecalus",
+            "url": "https://mecalus.ma",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://mecalus.ma/logo.png"
+            },
+            "description": "Agence immobilière spécialisée dans la vente, location et gestion locative à Marrakech et Casablanca. Appartements, villas, maisons, fermes, terrains et bureaux.",
+            "telephone": "+212602055165",
+            "email": "alilagrari2018@gmail.com.ma",
+            "address": [
+              {
+                "@type": "PostalAddress",
+                "streetAddress": "Guéliz",
+                "addressLocality": "Marrakech",
+                "addressCountry": "MA"
+              },
+              {
+                "@type": "PostalAddress",
+                "addressLocality": "Casablanca",
+                "addressCountry": "MA"
+              }
+            ],
+            "areaServed": [
+              { "@type": "City", "name": "Marrakech" },
+              { "@type": "City", "name": "Casablanca" }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/share/1CHHWHe5iW/?mibextid=wwXIfr",
+              "https://www.instagram.com/alilg010?igsh=ZHY2YTJvOWxydWxy",
+              "https://www.linkedin.com/in/abdelmouttalib-lagrari-316988233"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Services Immobiliers",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Vente immobilière"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Location immobilière"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Gestion locative"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Estimation immobilière"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://mecalus.ma/#website",
+            "url": "https://mecalus.ma",
+            "name": "Mecalus",
+            "description": "Agence immobilière à Marrakech et Casablanca — Vente, location et gestion locative",
+            "publisher": { "@id": "https://mecalus.ma/#organization" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://mecalus.ma/acheter?search={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

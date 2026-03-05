@@ -10,8 +10,8 @@ const DATA = {
     },
     {
       Icon: MapPin,
-      title: 'Expertise Locale',
-      desc: 'Connaissance approfondie des quartiers, des prix et des tendances du marché immobilier marocain.',
+      title: 'Expertise Locale Marrakech & Casablanca',
+      desc: 'Connaissance approfondie des quartiers, des prix et des tendances du marché immobilier à Marrakech et Casablanca.',
     },
     {
       Icon: Eye,
@@ -32,8 +32,8 @@ const DATA = {
     },
     {
       Icon: MapPin,
-      title: 'خبرة محلية',
-      desc: 'معرفة عميقة بالأحياء والأسعار واتجاهات سوق العقارات المغربي.',
+      title: 'خبرة محلية في مراكش والدار البيضاء',
+      desc: 'معرفة عميقة بالأحياء والأسعار واتجاهات سوق العقارات في مراكش والدار البيضاء.',
     },
     {
       Icon: Eye,
@@ -54,8 +54,8 @@ const DATA = {
     },
     {
       Icon: MapPin,
-      title: 'Local Expertise',
-      desc: 'Deep knowledge of neighborhoods, prices and trends in the Moroccan real estate market.',
+      title: 'Local Expertise in Marrakech & Casablanca',
+      desc: 'Deep knowledge of neighborhoods, prices and trends in the real estate market of Marrakech and Casablanca.',
     },
     {
       Icon: Eye,

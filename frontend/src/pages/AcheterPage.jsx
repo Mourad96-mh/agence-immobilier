@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useSEO from '../hooks/useSEO'
 import PageHero from '../components/PageHero'
 import FilterBar from '../components/FilterBar'
 import PropertyGrid from '../components/PropertyGrid'
@@ -15,6 +16,11 @@ const SALE_FILTERS = {
 }
 
 export default function AcheterPage() {
+  useSEO({
+    title: 'Acheter un bien immobilier à Marrakech & Casablanca | Mecalus',
+    description: "Parcourez nos annonces de vente : appartements, villas, maisons, fermes, terrains et bureaux à Marrakech et Casablanca. Trouvez votre bien idéal avec Mecalus.",
+    canonical: 'https://mecalus.ma/acheter',
+  })
   const { t } = useLanguage()
   const { properties, loading, filters, setFilters } = useProperties(SALE_FILTERS)
   const [selectedProperty, setSelectedProperty] = useState(null)

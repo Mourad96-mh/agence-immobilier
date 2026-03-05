@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useSEO from '../hooks/useSEO'
 import Hero from '../components/Hero'
 import FilterBar from '../components/FilterBar'
 import PropertyGrid from '../components/PropertyGrid'
@@ -18,6 +19,11 @@ const INITIAL_FILTERS = {
 }
 
 export default function HomePage() {
+  useSEO({
+    title: 'Mecalus — Agence Immobilière à Marrakech & Casablanca | Vente & Location',
+    description: "Mecalus, votre agence immobilière de confiance à Marrakech et Casablanca. Achat, vente et location d'appartements, villas, maisons, fermes, terrains et bureaux au Maroc. Estimation gratuite sous 24h.",
+    canonical: 'https://mecalus.ma/',
+  })
   const { properties, loading, filters, setFilters } = useProperties(INITIAL_FILTERS)
   const [selectedProperty, setSelectedProperty] = useState(null)
 

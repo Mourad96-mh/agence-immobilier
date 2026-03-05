@@ -1,20 +1,42 @@
-import { useEffect } from 'react'
-import { X, MapPin, Maximize2, BedDouble, Bath, Phone, MessageCircle } from 'lucide-react'
+import { useEffect, useState, useCallback } from 'react'
+import { X, MapPin, Maximize2, BedDouble, Bath, Phone, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
 
 export default function PropertyModal({ property, onClose }) {
   const { lang, t } = useLanguage()
+  const [imgIdx, setImgIdx] = useState(0)
+
+  const images = property?.images?.filter(Boolean) || []
+  const hasMany = images.length > 1
+
+  const prev = useCallback((e) => {
+    e?.stopPropagation()
+    setImgIdx((i) => (i - 1 + images.length) % images.length)
+  }, [images.length])
+
+  const next = useCallback((e) => {
+    e?.stopPropagation()
+    setImgIdx((i) => (i + 1) % images.length)
+  }, [images.length])
+
+  useEffect(() => {
+    setImgIdx(0)
+  }, [property])
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    const onKey = (e) => e.key === 'Escape' && onClose()
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft' && hasMany) prev()
+      if (e.key === 'ArrowRight' && hasMany) next()
+    }
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
     }
-  }, [onClose])
+  }, [onClose, hasMany, prev, next])
 
   if (!property) return null
 
@@ -34,12 +56,13 @@ export default function PropertyModal({ property, onClose }) {
           <X size={18} />
         </button>
 
-        {/* Image */}
+        {/* Image carousel */}
         <div className="modal-image-wrap">
-          {property.images?.[0] ? (
+          {images.length > 0 ? (
             <img
-              src={property.images[0]}
-              alt={title}
+              key={imgIdx}
+              src={images[imgIdx]}
+              alt={`${title} — ${imgIdx + 1}`}
               className="modal-img"
               onError={(e) => {
                 e.target.style.display = 'none'
@@ -49,6 +72,29 @@ export default function PropertyModal({ property, onClose }) {
           ) : (
             <div className="modal-img-placeholder" />
           )}
+
+          {hasMany && (
+            <>
+              <button className="carousel-btn carousel-btn-prev" onClick={prev} aria-label="Image précédente">
+                <ChevronLeft size={22} />
+              </button>
+              <button className="carousel-btn carousel-btn-next" onClick={next} aria-label="Image suivante">
+                <ChevronRight size={22} />
+              </button>
+              <div className="carousel-dots">
+                {images.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`carousel-dot${i === imgIdx ? ' active' : ''}`}
+                    onClick={(e) => { e.stopPropagation(); setImgIdx(i) }}
+                    aria-label={`Image ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <span className="carousel-counter">{imgIdx + 1} / {images.length}</span>
+            </>
+          )}
+
           <div className="modal-img-badges">
             <span className={`badge ${isRent ? 'badge-rent' : 'badge-sale'}`}>
               {t(`filters.${property.transactionType}`)}

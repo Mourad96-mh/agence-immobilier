@@ -7,7 +7,7 @@ const STEPS = {
       icon: Search,
       number: '01',
       title: 'Recherchez',
-      desc: 'Parcourez notre catalogue et filtrez par ville, type de bien et budget pour trouver les annonces qui correspondent à vos critères.',
+      desc: 'Parcourez notre catalogue de biens à Marrakech et Casablanca, filtrez par type de bien et budget pour trouver les annonces qui correspondent à vos critères.',
     },
     {
       icon: CalendarCheck,
@@ -27,7 +27,7 @@ const STEPS = {
       icon: Search,
       number: '01',
       title: 'ابحث',
-      desc: 'تصفح كتالوجنا وقم بالتصفية حسب المدينة ونوع العقار والميزانية للعثور على الإعلانات المناسبة لمعاييرك.',
+      desc: 'تصفح كتالوجنا من العقارات في مراكش والدار البيضاء، وقم بالتصفية حسب نوع العقار والميزانية للعثور على الإعلانات المناسبة لمعاييرك.',
     },
     {
       icon: CalendarCheck,
@@ -47,7 +47,7 @@ const STEPS = {
       icon: Search,
       number: '01',
       title: 'Search',
-      desc: 'Browse our catalogue and filter by city, property type and budget to find listings that match your criteria.',
+      desc: 'Browse our catalogue of properties in Marrakech and Casablanca, filter by property type and budget to find listings that match your criteria.',
     },
     {
       icon: CalendarCheck,

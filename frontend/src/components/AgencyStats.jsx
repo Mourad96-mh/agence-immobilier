@@ -6,7 +6,7 @@ export default function AgencyStats() {
   const stats = [
     { num: t('stats.sinceYear'), label: t('stats.since') },
     { num: '500+', label: t('stats.properties') },
-    { num: '10', label: t('stats.cities') },
+    { num: '2', label: t('stats.cities') },
     { num: '98%', label: t('stats.satisfaction') },
   ]
 

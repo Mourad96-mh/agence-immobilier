@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapPin, Maximize2, BedDouble, Bath, Phone, Heart } from 'lucide-react'
+import { MapPin, Maximize2, BedDouble, Bath, Phone, Heart, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
 
@@ -17,6 +17,19 @@ export default function PropertyCard({ property, onSelect }) {
   const waMsg = encodeURIComponent(
     `Bonjour, je suis intéressé(e) par le bien : *${title}* à ${property.city}. Pouvez-vous me donner plus d'informations ?`
   )
+
+  const images = property.images?.filter(Boolean) || []
+  const hasMany = images.length > 1
+  const [imgIdx, setImgIdx] = useState(0)
+
+  const prevImg = (e) => {
+    e.stopPropagation()
+    setImgIdx((i) => (i - 1 + images.length) % images.length)
+  }
+  const nextImg = (e) => {
+    e.stopPropagation()
+    setImgIdx((i) => (i + 1) % images.length)
+  }
 
   // Favorites — stored in localStorage
   const [isFav, setIsFav] = useState(() => {
@@ -50,15 +63,36 @@ export default function PropertyCard({ property, onSelect }) {
   return (
     <article className="property-card" onClick={() => onSelect(property)} role="button" tabIndex={0}>
       <div className="card-image-wrap">
-        {property.images?.[0] && (
+        {images[imgIdx] && (
           <img
-            src={property.images[0]}
+            src={images[imgIdx]}
             alt={title}
             className="card-img"
             loading="lazy"
             onError={handleImgError}
           />
         )}
+
+        {hasMany && (
+          <>
+            <button className="card-carousel-btn card-carousel-prev" onClick={prevImg} aria-label="Image précédente">
+              <ChevronLeft size={16} />
+            </button>
+            <button className="card-carousel-btn card-carousel-next" onClick={nextImg} aria-label="Image suivante">
+              <ChevronRight size={16} />
+            </button>
+            <div className="card-carousel-dots">
+              {images.map((_, i) => (
+                <span
+                  key={i}
+                  className={`card-carousel-dot${i === imgIdx ? ' active' : ''}`}
+                  onClick={(e) => { e.stopPropagation(); setImgIdx(i) }}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
         <div className="card-badges">
           <span className={`badge ${isRent ? 'badge-rent' : 'badge-sale'}`}>
             {t(`filters.${property.transactionType}`)}

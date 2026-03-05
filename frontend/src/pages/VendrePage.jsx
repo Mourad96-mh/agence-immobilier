@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MessageCircle, CheckCircle } from 'lucide-react'
+import useSEO from '../hooks/useSEO'
 import PageHero from '../components/PageHero'
 import ContactSection from '../components/ContactSection'
 import { useLanguage } from '../context/LanguageContext'
@@ -10,6 +11,11 @@ import { AGENCY } from '../config'
 const EMPTY_FORM = { type: '', city: '', area: '', name: '', phone: '', email: '', notes: '' }
 
 export default function VendrePage() {
+  useSEO({
+    title: 'Vendre votre bien immobilier à Marrakech & Casablanca | Mecalus',
+    description: "Vendez votre appartement, villa, maison ou terrain rapidement et au meilleur prix. Mecalus vous accompagne à Marrakech et Casablanca avec une expertise locale reconnue. Estimation gratuite.",
+    canonical: 'https://mecalus.ma/vendre',
+  })
   const { t } = useLanguage()
   const { showToast } = useToast()
   const navigate = useNavigate()
@@ -95,13 +101,16 @@ export default function VendrePage() {
                   </div>
                   <div>
                     <label className="filter-label">{t('ownerForm.city')}</label>
-                    <input
+                    <select
                       className="form-input"
-                      type="text"
                       value={form.city}
                       onChange={(e) => set('city', e.target.value)}
                       required
-                    />
+                    >
+                      <option value="">— Choisir —</option>
+                      <option value="Marrakech">Marrakech</option>
+                      <option value="Casablanca">Casablanca</option>
+                    </select>
                   </div>
                 </div>
 

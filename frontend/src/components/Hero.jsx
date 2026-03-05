@@ -19,7 +19,7 @@ export default function Hero() {
             <div className="hero-stat-label">{t('hero.stats.properties')}</div>
           </div>
           <div className="hero-stat">
-            <div className="hero-stat-num">10</div>
+            <div className="hero-stat-num">2</div>
             <div className="hero-stat-label">{t('hero.stats.cities')}</div>
           </div>
           <div className="hero-stat">

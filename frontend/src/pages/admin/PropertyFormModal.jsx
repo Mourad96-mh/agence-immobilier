@@ -21,10 +21,14 @@ const EMPTY_FORM = {
 const CATEGORIES = [
   { value: 'apartment', label: 'Appartement' },
   { value: 'villa', label: 'Villa' },
-  { value: 'office', label: 'Bureau' },
+  { value: 'maison', label: 'Maison' },
+  { value: 'ferme', label: 'Ferme' },
+  { value: 'office', label: 'Plateau Bureau' },
   { value: 'land', label: 'Terrain' },
   { value: 'commercial', label: 'Commercial' },
 ]
+
+const CITIES = ['Marrakech', 'Casablanca']
 
 const TRANSACTION_TYPES = [
   { value: 'sale', label: 'Vente' },
@@ -65,27 +69,31 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
     setForm((f) => ({ ...f, [group]: { ...f[group], [key]: value } }))
 
   const handleUpload = async (e) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    const idx = form.images.length
-    setUploadingIdx(idx)
-    try {
-      const fd = new FormData()
-      fd.append('image', file)
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: fd,
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.message || 'Upload failed')
-      setForm((f) => ({ ...f, images: [...f.images, data.url] }))
-    } catch (err) {
-      setError(`Erreur upload: ${err.message}`)
-    } finally {
-      setUploadingIdx(null)
-      e.target.value = ''
+    const files = Array.from(e.target.files || [])
+    if (!files.length) return
+    setUploadingIdx(form.images.length)
+    const errors = []
+    const uploaded = []
+    for (const file of files) {
+      try {
+        const fd = new FormData()
+        fd.append('image', file)
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: fd,
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data.message || 'Upload failed')
+        uploaded.push(data.url)
+      } catch (err) {
+        errors.push(err.message)
+      }
     }
+    if (uploaded.length) setForm((f) => ({ ...f, images: [...f.images, ...uploaded] }))
+    if (errors.length) setError(`Erreur upload: ${errors.join(', ')}`)
+    setUploadingIdx(null)
+    e.target.value = ''
   }
 
   const removeImage = (idx) =>
@@ -200,12 +208,10 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
           <div className="modal-row">
             <div className="modal-field">
               <label>Ville <span className="required">*</span></label>
-              <input
-                type="text"
-                value={form.city}
-                onChange={(e) => set('city', e.target.value)}
-                placeholder="ex: Casablanca"
-              />
+              <select value={form.city} onChange={(e) => set('city', e.target.value)}>
+                <option value="">— Choisir —</option>
+                {CITIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
             </div>
             <div className="modal-field">
               <label>Prix (MAD) <span className="required">*</span></label>
@@ -300,7 +306,7 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
             <label className="modal-img-upload-btn">
               <Upload size={16} />
               <span>Ajouter</span>
-              <input type="file" accept="image/*" onChange={handleUpload} hidden />
+              <input type="file" accept="image/*" multiple onChange={handleUpload} hidden />
             </label>
           </div>
 

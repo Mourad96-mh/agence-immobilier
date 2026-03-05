@@ -14,7 +14,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" className="footer-logo">
-              <img src={logo} alt="Logo" className="logo-img" />
+              <img src={logo} alt="Mecalus — Agence Immobilière à Marrakech & Casablanca" className="logo-img" />
             </Link>
             <p className="footer-tagline">{t('footer.tagline')}</p>
           </div>

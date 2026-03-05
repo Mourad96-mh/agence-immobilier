@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useSEO from '../hooks/useSEO'
 import PageHero from '../components/PageHero'
 import FilterBar from '../components/FilterBar'
 import PropertyGrid from '../components/PropertyGrid'
@@ -14,6 +15,11 @@ const RENT_FILTERS = {
 }
 
 export default function LouerPage() {
+  useSEO({
+    title: 'Location immobilière à Marrakech & Casablanca | Mecalus',
+    description: "Trouvez votre location idéale à Marrakech ou Casablanca. Appartements, villas, maisons et bureaux à louer. Mecalus, votre agence immobilière de confiance au Maroc.",
+    canonical: 'https://mecalus.ma/louer',
+  })
   const { t } = useLanguage()
   const { properties, loading, filters, setFilters } = useProperties(RENT_FILTERS)
   const [selectedProperty, setSelectedProperty] = useState(null)
