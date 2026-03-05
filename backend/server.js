@@ -9,15 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection — supports MONGODB_URI or DATABASE + DATABASE_PASSWORD
-let MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI && process.env.DATABASE) {
-  MONGODB_URI = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD || '');
-}
-MONGODB_URI = MONGODB_URI || 'mongodb://localhost:27017/immobilier';
+const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(DB)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
@@ -32,9 +27,7 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 if (process.env.NODE_ENV === 'production') {
   const distPath = path.join(__dirname, '../frontend/dist');
   app.use(express.static(distPath));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-  });
+  app.get('*', (req, res) => res.sendFile(path.join(distPath, 'index.html')));
 }
 
 const PORT = process.env.PORT || 8000;

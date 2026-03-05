@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 const Property = require('./models/Property');
-const Lead = require('./models/Lead');
 require('dotenv').config({ path: './config.env' });
 
-let MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI && process.env.DATABASE) {
-  MONGODB_URI = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD || '');
-}
-MONGODB_URI = MONGODB_URI || 'mongodb://localhost:27017/immobilier';
+const MONGODB_URI = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
 const properties = [
   {
@@ -315,15 +310,6 @@ const properties = [
   },
 ];
 
-const testLeads = [
-  { name: 'Karim Bennani', phone: '0661234567', email: 'karim@example.com', message: 'Je cherche un appartement 3 chambres à Casablanca.', source: 'contact', createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
-  { name: 'Fatima Zahra', phone: '0677891234', email: 'fatima@example.com', message: 'Intéressée par la villa à Agadir.', source: 'contact', createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) },
-  { name: 'Youssef El Mansouri', phone: '0655443322', email: 'youssef@example.com', propertyType: 'apartment', city: 'Rabat', area: 120, message: 'Veux vendre mon appartement de 120m² à Rabat.', source: 'vendre', createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000) },
-  { name: 'Nadia Cherkaoui', phone: '0699001122', email: 'nadia@example.com', propertyType: 'villa', city: 'Marrakech', area: 280, message: 'Villa avec piscine, cherche agence sérieuse.', source: 'vendre', createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) },
-  { name: 'Omar Tazi', phone: '0622334455', email: 'omar@example.com', propertyType: 'apartment', city: 'Casablanca', area: 90, message: 'Appartement à mettre en location longue durée.', source: 'location', createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000) },
-  { name: 'Salma Idrissi', phone: '0633221100', email: 'salma@example.com', propertyType: 'office', city: 'Rabat', area: 60, message: 'Bureau disponible immédiatement.', source: 'location', createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000) },
-];
-
 async function seed() {
   try {
     await mongoose.connect(MONGODB_URI);
@@ -333,13 +319,7 @@ async function seed() {
     console.log('🗑️  Cleared existing properties');
 
     const inserted = await Property.insertMany(properties);
-    console.log(`✅ Seeded ${inserted.length} properties`);
-
-    await Lead.deleteMany({});
-    console.log('🗑️  Cleared existing leads');
-
-    const leads = await Lead.insertMany(testLeads);
-    console.log(`✅ Seeded ${leads.length} test leads`);
+    console.log(`✅ Seeded ${inserted.length} properties successfully`);
 
     await mongoose.disconnect();
     console.log('👋 Disconnected from MongoDB');
