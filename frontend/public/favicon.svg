@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#8B6508"/>
+      <stop offset="35%"  stop-color="#F5D060"/>
+      <stop offset="60%"  stop-color="#C9940A"/>
+      <stop offset="100%" stop-color="#8B6508"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#F5D060"/>
+      <stop offset="100%" stop-color="#9A7208"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded dark background -->
+  <rect width="64" height="64" rx="13" fill="#0f1624"/>
+
+  <!-- M lettermark scaled to fill the square -->
+  <g transform="translate(2, 3) scale(1.04)">
+
+    <!-- Outer M -->
+    <path d="M3 51 L12 5 L29 32 L46 5 L55 51"
+          stroke="url(#g1)" stroke-width="3"
+          stroke-linejoin="miter" stroke-linecap="round" fill="none"/>
+
+    <!-- Left inner detail -->
+    <line x1="4"  y1="51" x2="19" y2="23" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="12" y1="5"  x2="19" y2="23" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+
+    <!-- Right inner detail -->
+    <line x1="54" y1="51" x2="39" y2="23" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="46" y1="5"  x2="39" y2="23" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+
+    <!-- Central diamond -->
+    <path d="M29 11 L36 28 L29 45 L22 28 Z"
+          stroke="url(#g2)" stroke-width="1.7" fill="none"/>
+
+    <!-- Top pin of diamond -->
+    <line x1="29" y1="5" x2="29" y2="11" stroke="url(#g1)" stroke-width="1.7" stroke-linecap="round"/>
+
+    <!-- Base line -->
+    <line x1="3" y1="51" x2="55" y2="51"
+          stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
