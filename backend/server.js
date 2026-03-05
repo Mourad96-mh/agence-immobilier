@@ -11,9 +11,21 @@ app.use(express.json());
 
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
+const Admin = require('./models/Admin');
+
 mongoose
   .connect(DB)
-  .then(() => console.log('✅ MongoDB connected'))
+  .then(async () => {
+    console.log('✅ MongoDB connected');
+    const existing = await Admin.findOne();
+    if (!existing) {
+      await Admin.create({
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
+      });
+      console.log('✅ Admin account initialized from env vars');
+    }
+  })
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // API routes

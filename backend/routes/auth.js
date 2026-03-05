@@ -1,10 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
 const router = express.Router();
-
-const ENV_PATH = path.join(__dirname, '../config.env');
+const Admin = require('../models/Admin');
 
 const verifyToken = (req, res, next) => {
   const auth = req.headers.authorization;
@@ -18,42 +15,40 @@ const verifyToken = (req, res, next) => {
 };
 
 // POST /api/auth/login
-router.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  if (email !== process.env.ADMIN_EMAIL || password !== process.env.ADMIN_PASSWORD) {
-    return res.status(401).json({ message: 'Invalid credentials' });
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const admin = await Admin.findOne();
+    if (!admin || email !== admin.email || password !== admin.password) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.json({ token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.json({ token });
 });
 
 // PUT /api/auth/credentials
-router.put('/credentials', verifyToken, (req, res) => {
-  const { currentPassword, newEmail, newPassword } = req.body;
-
-  if (currentPassword !== process.env.ADMIN_PASSWORD) {
-    return res.status(401).json({ message: 'Mot de passe actuel incorrect' });
+router.put('/credentials', verifyToken, async (req, res) => {
+  try {
+    const { currentPassword, newEmail, newPassword } = req.body;
+    const admin = await Admin.findOne();
+    if (!admin || currentPassword !== admin.password) {
+      return res.status(401).json({ message: 'Mot de passe actuel incorrect' });
+    }
+    if (!newEmail && !newPassword) {
+      return res.status(400).json({ message: 'Aucune modification fournie' });
+    }
+    if (newEmail) admin.email = newEmail;
+    if (newPassword) admin.password = newPassword;
+    await admin.save();
+    const email = admin.email;
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.json({ token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  if (!newEmail && !newPassword) {
-    return res.status(400).json({ message: 'Aucune modification fournie' });
-  }
-
-  let env = fs.readFileSync(ENV_PATH, 'utf8');
-
-  if (newEmail) {
-    env = env.replace(/^ADMIN_EMAIL=.*/m, `ADMIN_EMAIL=${newEmail}`);
-    process.env.ADMIN_EMAIL = newEmail;
-  }
-  if (newPassword) {
-    env = env.replace(/^ADMIN_PASSWORD=.*/m, `ADMIN_PASSWORD=${newPassword}`);
-    process.env.ADMIN_PASSWORD = newPassword;
-  }
-
-  fs.writeFileSync(ENV_PATH, env);
-
-  const email = newEmail || process.env.ADMIN_EMAIL;
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.json({ token });
 });
 
 module.exports = router;
