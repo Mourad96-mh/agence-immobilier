@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
-const CATEGORIES = ['apartment', 'villa', 'office', 'land', 'commercial', 'maison', 'ferme']
+const CATEGORIES = ['apartment', 'villa', 'riad', 'office', 'land', 'commercial', 'maison', 'ferme']
 const TRANSACTIONS = ['sale', 'rent']
 const CITIES = ['Marrakech', 'Casablanca']
 

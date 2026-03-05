@@ -53,6 +53,7 @@ export default {
     ferme: 'مزرعة',
     office: 'فضاء مكتبي',
     land: 'أرض',
+    riad: 'رياض',
     commercial: 'محل تجاري',
     sale: 'للبيع',
     rent: 'للإيجار',

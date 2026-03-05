@@ -14,7 +14,7 @@ const propertySchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ['apartment', 'villa', 'office', 'land', 'commercial', 'maison', 'ferme'],
+      enum: ['apartment', 'villa', 'office', 'land', 'commercial', 'maison', 'ferme', 'riad'],
       required: true,
     },
     transactionType: {
@@ -23,6 +23,7 @@ const propertySchema = new mongoose.Schema(
       required: true,
     },
     city: { type: String, required: true },
+    quartier: { type: String, default: '' },
     price: { type: Number, required: true },
     area: { type: Number, default: null },
     rooms: { type: Number, default: null },
@@ -31,6 +32,7 @@ const propertySchema = new mongoose.Schema(
     address: { type: String, default: '' },
     isAvailable: { type: Boolean, default: true },
     featured: { type: Boolean, default: false },
+    propertyCode: { type: String, unique: true, sparse: true },
   },
   { timestamps: true }
 );

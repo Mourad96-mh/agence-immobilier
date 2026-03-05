@@ -11,9 +11,12 @@ import AcheterPage from './pages/AcheterPage'
 import LouerPage from './pages/LouerPage'
 import VendrePage from './pages/VendrePage'
 import MettreEnLocationPage from './pages/MettreEnLocationPage'
+import PropertyLandingPage from './pages/PropertyLandingPage'
+import { LANDING_PAGES } from './pages/landingConfigs'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminLeads from './pages/admin/AdminLeads'
 import AdminProperties from './pages/admin/AdminProperties'
+import AdminSettings from './pages/admin/AdminSettings'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -40,6 +43,11 @@ function AppLayout() {
           <Route path="/louer"               element={<LouerPage />} />
           <Route path="/vendre"              element={<VendrePage />} />
           <Route path="/mettre-en-location"  element={<MettreEnLocationPage />} />
+          {LANDING_PAGES.map(({ path, seo, hero, intro, faq, defaultFilters }) => (
+            <Route key={path} path={path} element={
+              <PropertyLandingPage seo={seo} hero={hero} intro={intro} faq={faq} defaultFilters={defaultFilters} />
+            } />
+          ))}
         </Routes>
       </main>
       <Footer />
@@ -65,6 +73,14 @@ function AdminLayout() {
         element={
           <ProtectedRoute>
             <AdminProperties />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/settings"
+        element={
+          <ProtectedRoute>
+            <AdminSettings />
           </ProtectedRoute>
         }
       />

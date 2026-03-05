@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { LogOut, BarChart2, Building2 } from 'lucide-react'
+import { LogOut, BarChart2, Building2, Settings } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 export default function AdminNav() {
@@ -25,6 +25,12 @@ export default function AdminNav() {
             onClick={() => navigate('/admin/properties')}
           >
             <Building2 size={15} /> Propriétés
+          </button>
+          <button
+            className={`admin-nav-tab${pathname === '/admin/settings' ? ' active' : ''}`}
+            onClick={() => navigate('/admin/settings')}
+          >
+            <Settings size={15} /> Paramètres
           </button>
         </nav>
       </div>

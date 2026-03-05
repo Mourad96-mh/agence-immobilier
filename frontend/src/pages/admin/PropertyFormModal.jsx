@@ -12,6 +12,7 @@ const EMPTY_FORM = {
   area: '',
   rooms: '',
   bathrooms: '',
+  quartier: '',
   address: '',
   featured: false,
   isAvailable: true,
@@ -22,6 +23,7 @@ const CATEGORIES = [
   { value: 'apartment', label: 'Appartement' },
   { value: 'villa', label: 'Villa' },
   { value: 'maison', label: 'Maison' },
+  { value: 'riad', label: 'Riad' },
   { value: 'ferme', label: 'Ferme' },
   { value: 'office', label: 'Plateau Bureau' },
   { value: 'land', label: 'Terrain' },
@@ -29,6 +31,19 @@ const CATEGORIES = [
 ]
 
 const CITIES = ['Marrakech', 'Casablanca']
+
+const QUARTIERS = {
+  Casablanca: [
+    'Maarif', 'Anfa', 'Ain Diab', 'CIL', 'Gauthier', 'Racine', 'Bourgogne',
+    'Belvédère', 'Hay Hassani', 'Sidi Maarouf', 'Bd Zerktouni', 'Centre-ville',
+    'Ain Chock', 'Hay Mohammadi', 'Salmia', 'Oasis', 'Californie', 'Val Fleurie',
+  ],
+  Marrakech: [
+    'Guéliz', 'Hivernage', 'Médina', 'Palmeraie', "M'Hamid", 'Agdal',
+    'Targa', 'Sidi Ghanem', 'Semlalia', 'Massira', 'Daoudiate', 'Hay Salam',
+    "Route de Fès", "Route d'Ourika", 'Route de Casablanca',
+  ],
+}
 
 const TRANSACTION_TYPES = [
   { value: 'sale', label: 'Vente' },
@@ -52,6 +67,7 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
         category: property.category || 'apartment',
         transactionType: property.transactionType || 'sale',
         city: property.city || '',
+        quartier: property.quartier || '',
         price: property.price ?? '',
         area: property.area ?? '',
         rooms: property.rooms ?? '',
@@ -144,8 +160,6 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
         </div>
 
         <form className="modal-form" onSubmit={handleSubmit}>
-          {error && <div className="modal-error">{error}</div>}
-
           {/* Titre */}
           <div className="modal-section-title">Titre</div>
           <div className="modal-field">
@@ -208,20 +222,31 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
           <div className="modal-row">
             <div className="modal-field">
               <label>Ville <span className="required">*</span></label>
-              <select value={form.city} onChange={(e) => set('city', e.target.value)}>
+              <select value={form.city} onChange={(e) => { set('city', e.target.value); set('quartier', '') }}>
                 <option value="">— Choisir —</option>
                 {CITIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div className="modal-field">
-              <label>Prix (MAD) <span className="required">*</span></label>
-              <input
-                type="number"
-                min="0"
-                value={form.price}
-                onChange={(e) => set('price', e.target.value)}
-              />
+              <label>Quartier</label>
+              <select
+                value={form.quartier}
+                onChange={(e) => set('quartier', e.target.value)}
+                disabled={!form.city}
+              >
+                <option value="">— Choisir —</option>
+                {(QUARTIERS[form.city] || []).map((q) => <option key={q} value={q}>{q}</option>)}
+              </select>
             </div>
+          </div>
+          <div className="modal-field">
+            <label>Prix (MAD) <span className="required">*</span></label>
+            <input
+              type="number"
+              min="0"
+              value={form.price}
+              onChange={(e) => set('price', e.target.value)}
+            />
           </div>
 
           <div className="modal-row">
@@ -311,6 +336,7 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
           </div>
 
           <div className="modal-footer">
+            {error && <div className="modal-error modal-error-footer">{error}</div>}
             <button type="button" className="modal-btn-cancel" onClick={onClose}>
               Annuler
             </button>

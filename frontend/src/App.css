@@ -2221,6 +2221,75 @@ a {
   padding: 0 0 48px;
 }
 
+/* Admin Settings */
+.admin-settings-wrap {
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+.admin-settings-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.admin-settings-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.admin-settings-form {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.settings-input-wrap {
+  position: relative;
+}
+
+.settings-input-wrap input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.settings-eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.settings-eye-btn:hover { color: var(--primary); }
+
+.settings-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 4px 0;
+}
+
+.admin-settings-success {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #166534;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+}
+
 .admin-topbar {
   display: flex;
   align-items: center;
@@ -2848,7 +2917,9 @@ a {
 
 .modal-footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
@@ -2967,4 +3038,80 @@ a {
 @keyframes toastIn {
   from { opacity: 0; transform: translateX(-50%) translateY(20px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ===================================
+   Property Code Badges & Admin Search
+   =================================== */
+
+/* Code badge on PropertyCard */
+.card-code-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+/* Code badge on PropertyModal */
+.property-code-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  letter-spacing: 0.08em;
+}
+
+/* Admin table code cell */
+.prop-code-cell {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 6px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.prop-code-empty {
+  color: var(--text-muted);
+}
+
+/* Admin code search input */
+.admin-code-search {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  background: #fff;
+  color: var(--text);
+  min-width: 220px;
+}
+
+.admin-code-search:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.modal-error-footer {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.prop-quartier-cell {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
 }

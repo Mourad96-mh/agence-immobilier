@@ -46,7 +46,7 @@ export default function PropertyModal({ property, onClose }) {
   const pricePerSqm = property.area ? Math.round(property.price / property.area) : null
 
   const waMsg = encodeURIComponent(
-    `Bonjour Mecalus, je suis intéressé(e) par le bien :\n*${title}* à ${property.city}.\nPouvez-vous me contacter ?`
+    `Bonjour Mecalus, je suis intéressé(e) par le bien :\n*${title}* à ${property.city}${property.propertyCode ? ' (Réf: ' + property.propertyCode + ')' : ''}.\nPouvez-vous me contacter ?`
   )
 
   return (
@@ -111,8 +111,11 @@ export default function PropertyModal({ property, onClose }) {
             <h2 className="modal-title">{title}</h2>
             <p className="modal-location">
               <MapPin size={14} />
-              {property.city}
+              {property.city}{property.quartier ? `, ${property.quartier}` : ''}
             </p>
+            {property.propertyCode && (
+              <span className="property-code-badge">Réf. {property.propertyCode}</span>
+            )}
           </div>
 
           <div className="modal-price-block">

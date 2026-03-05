@@ -15,7 +15,7 @@ export default function PropertyCard({ property, onSelect }) {
       : null
 
   const waMsg = encodeURIComponent(
-    `Bonjour, je suis intéressé(e) par le bien : *${title}* à ${property.city}. Pouvez-vous me donner plus d'informations ?`
+    `Bonjour, je suis intéressé(e) par le bien : *${title}* à ${property.city}${property.propertyCode ? ' (Réf: ' + property.propertyCode + ')' : ''}. Pouvez-vous me donner plus d'informations ?`
   )
 
   const images = property.images?.filter(Boolean) || []
@@ -116,7 +116,8 @@ export default function PropertyCard({ property, onSelect }) {
 
         <p className="card-location">
           <MapPin size={13} />
-          {property.city}
+          {property.city}{property.quartier ? `, ${property.quartier}` : ''}
+          {property.propertyCode && <span className="card-code-badge">{property.propertyCode}</span>}
         </p>
 
         <div className="card-features">

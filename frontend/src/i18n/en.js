@@ -53,6 +53,7 @@ export default {
     ferme: 'Farm',
     office: 'Office Space',
     land: 'Land',
+    riad: 'Riad',
     commercial: 'Commercial',
     sale: 'For Sale',
     rent: 'For Rent',

@@ -10,6 +10,7 @@ const CATEGORY_LABELS = {
   villa: 'Villa',
   office: 'Bureau',
   land: 'Terrain',
+  riad: 'Riad',
   commercial: 'Commercial',
 }
 
@@ -20,7 +21,7 @@ export default function AdminProperties() {
   const navigate = useNavigate()
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
-  const [filters, setFilters] = useState({ category: '', transactionType: '', isAvailable: '' })
+  const [filters, setFilters] = useState({ category: '', transactionType: '', isAvailable: '', codeSearch: '' })
   const [modal, setModal] = useState(null) // null | 'add' | property object (edit)
 
   const fetchProperties = useCallback(async () => {
@@ -74,6 +75,7 @@ export default function AdminProperties() {
     if (filters.transactionType && p.transactionType !== filters.transactionType) return false
     if (filters.isAvailable === 'true' && !p.isAvailable) return false
     if (filters.isAvailable === 'false' && p.isAvailable) return false
+    if (filters.codeSearch && !p.propertyCode?.toLowerCase().includes(filters.codeSearch.toLowerCase())) return false
     return true
   })
 
@@ -131,6 +133,13 @@ export default function AdminProperties() {
           <option value="true">Disponible</option>
           <option value="false">Vendu / Loué</option>
         </select>
+        <input
+          type="text"
+          placeholder="Rechercher par code (ex: CA01)"
+          value={filters.codeSearch}
+          onChange={(e) => setFilters((f) => ({ ...f, codeSearch: e.target.value }))}
+          className="admin-code-search"
+        />
         <button className="admin-icon-btn" onClick={fetchProperties} title="Actualiser">
           <RefreshCw size={15} />
         </button>
@@ -149,9 +158,10 @@ export default function AdminProperties() {
           <table className="admin-table">
             <thead>
               <tr>
+                <th>Code</th>
                 <th>Photo</th>
                 <th>Titre</th>
-                <th>Ville</th>
+                <th>Ville / Quartier</th>
                 <th>Prix</th>
                 <th>Type</th>
                 <th>Catégorie</th>
@@ -162,6 +172,13 @@ export default function AdminProperties() {
             <tbody>
               {filtered.map((prop) => (
                 <tr key={prop._id}>
+                  <td>
+                    {prop.propertyCode ? (
+                      <span className="prop-code-cell">{prop.propertyCode}</span>
+                    ) : (
+                      <span className="prop-code-empty">—</span>
+                    )}
+                  </td>
                   <td>
                     {prop.images?.[0] ? (
                       <img
@@ -174,7 +191,10 @@ export default function AdminProperties() {
                     )}
                   </td>
                   <td className="admin-td-name">{prop.title?.fr || '—'}</td>
-                  <td>{prop.city}</td>
+                  <td>
+                    {prop.city}
+                    {prop.quartier && <div className="prop-quartier-cell">{prop.quartier}</div>}
+                  </td>
                   <td className="prop-price">
                     {prop.price?.toLocaleString('fr-MA')} MAD
                   </td>

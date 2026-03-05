@@ -3,8 +3,8 @@ export const AGENCY = {
   name: "Mecalus",
   phone: "+212602055165",
   whatsapp: "212779361548", // without + for wa.me links
-  whatsappDisplay: "+212 6 02055165",
-  phoneDisplay: "+212 7 79361548",
+  whatsappDisplay: "+212 7 79361548",
+  phoneDisplay: "+212 6 02055165",
   email: "alilagrari2018@gmail.com.ma",
   address: "Gueliz — Marrakech, Maroc",
   facebook: "https://www.facebook.com/share/1CHHWHe5iW/?mibextid=wwXIfr",

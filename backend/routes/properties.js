@@ -4,21 +4,58 @@ const jwt = require("jsonwebtoken");
 const Property = require("../models/Property");
 const auth = require("../middleware/auth");
 
-// Optional auth: sets req.admin if valid token present, but doesn't block
+const CITY_CODE_MAP = {
+  Casablanca: "CA",
+  Marrakech: "MA",
+  Rabat: "RA",
+  Agadir: "AG",
+  Tanger: "TA",
+  "Fès": "FE",
+  "Meknès": "ME",
+  Oujda: "OU",
+  Mohammedia: "MO",
+  "El Jadida": "EJ",
+  Safi: "SA",
+  Kenitra: "KE",
+  "Tétouan": "TE",
+  "Beni Mellal": "BM",
+};
+
+function getCityPrefix(city) {
+  const normalized = city.trim();
+  if (CITY_CODE_MAP[normalized]) return CITY_CODE_MAP[normalized];
+  return normalized.replace(/[^a-zA-Z]/g, '').slice(0, 2).toUpperCase().padEnd(2, 'X');
+}
+
+async function generatePropertyCode(city) {
+  const prefix = getCityPrefix(city);
+  const count = await Property.countDocuments({
+    propertyCode: new RegExp('^' + prefix + '[0-9]+$')
+  });
+  let num = count + 1;
+  for (let attempts = 0; attempts < 200; attempts++) {
+    const code = prefix + String(num).padStart(2, '0');
+    const exists = await Property.findOne({ propertyCode: code });
+    if (!exists) return code;
+    num++;
+  }
+  throw new Error("Impossible de generer un code unique pour cette propriete");
+}
+
+// Optional auth: sets req.admin if valid token present, but does not block
 function optionalAuth(req, res, next) {
   const header = req.headers.authorization;
   if (header && header.startsWith("Bearer ")) {
     try {
       req.admin = jwt.verify(header.split(" ")[1], process.env.JWT_SECRET);
     } catch {
-      // invalid token — treat as unauthenticated
+      // invalid token -- treat as unauthenticated
     }
   }
   next();
 }
 
 // GET /api/properties
-// Admin with showAll=true sees all properties; public sees only isAvailable: true
 router.get("/", optionalAuth, async (req, res) => {
   try {
     const {
@@ -30,6 +67,7 @@ router.get("/", optionalAuth, async (req, res) => {
       minRooms,
       search,
       showAll,
+      code,
     } = req.query;
 
     const query = {};
@@ -46,6 +84,10 @@ router.get("/", optionalAuth, async (req, res) => {
       query.price = {};
       if (minPrice) query.price.$gte = Number(minPrice);
       if (maxPrice) query.price.$lte = Number(maxPrice);
+    }
+
+    if (code && code.trim()) {
+      query.propertyCode = code.trim().toUpperCase();
     }
 
     if (search && search.trim()) {
@@ -74,10 +116,11 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// POST /api/properties — auth protected
+// POST /api/properties -- auth protected
 router.post("/", auth, async (req, res) => {
   try {
-    const property = new Property(req.body);
+    const code = await generatePropertyCode(req.body.city);
+    const property = new Property({ ...req.body, propertyCode: code });
     await property.save();
     res.status(201).json(property);
   } catch (err) {
@@ -85,62 +128,7 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-// exports.addProduct = async (req, res) => {
-//   try {
-//     const {
-//       name,
-//       description,
-//       price,
-//       category,
-//       subcategory,
-//       bestseller,
-//       sizes,
-//     } = req.body;
-
-//     const imageUrls = req.files?.map((file) => file.path) || [];
-//     console.log(req.files);
-//     const newProduct = {
-//       name,
-//       description,
-//       price,
-//       category,
-//       subcategory,
-//       bestseller: bestseller === "true" ? true : false,
-//       sizes: JSON.parse(sizes),
-//       image: imageUrls,
-//     };
-
-//     const product = await Product.create(newProduct);
-//     res.status(201).json({
-//       status: "success",
-//       message: "Product was created successfully",
-//       data: product,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({
-//       status: "fail",
-//       message: "Something went wrong while creating a new product",
-//     });
-//   }
-// };
-
-// productRouter.post(
-//   "/",
-//   adminAuth,
-//   (req, res, next) => {
-//     upload.array("image", 5)(req, res, (err) => {
-//       if (err) {
-//         console.error("Upload Error:", err);
-//         return res.status(400).json({ status: "fail", message: err.message });
-//       }
-//       next();
-//     });
-//   },
-//   addProduct
-// );
-
-// PATCH /api/properties/:id — auth protected, partial update
+// PATCH /api/properties/:id -- auth protected, partial update
 router.patch("/:id", auth, async (req, res) => {
   try {
     const property = await Property.findByIdAndUpdate(req.params.id, req.body, {
@@ -155,7 +143,7 @@ router.patch("/:id", auth, async (req, res) => {
   }
 });
 
-// DELETE /api/properties/:id — auth protected
+// DELETE /api/properties/:id -- auth protected
 router.delete("/:id", auth, async (req, res) => {
   try {
     await Property.findByIdAndDelete(req.params.id);
