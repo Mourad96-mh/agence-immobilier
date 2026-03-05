@@ -154,7 +154,7 @@ export default {
     links: 'روابط سريعة',
     contact: 'اتصل بنا',
     phone: '+212 6 22 95 89 91',
-    email: 'contact@mecalus.ma',
+    email: 'contact@mecalus.org',
     address: 'تيمارة، المغرب',
     rights: '© 2025 ميكالوس. جميع الحقوق محفوظة.',
   },

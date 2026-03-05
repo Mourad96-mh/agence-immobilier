@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /admin/
 
-Sitemap: https://mecalus.ma/sitemap.xml
+Sitemap: https://mecalus.org/sitemap.xml

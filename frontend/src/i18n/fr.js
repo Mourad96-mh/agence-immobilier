@@ -154,7 +154,7 @@ export default {
     links: 'Liens rapides',
     contact: 'Contact',
     phone: '+212 6 22 95 89 91',
-    email: 'contact@mecalus.ma',
+    email: 'contact@mecalus.org',
     address: 'Témara, Maroc',
     rights: '© 2025 Mecalus. Tous droits réservés.',
   },
