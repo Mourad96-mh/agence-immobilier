@@ -35,6 +35,16 @@ app.use('/api/leads', require('./routes/leads'));
 app.use('/api/upload', require('./routes/upload'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
+// Redirect onrender.com to canonical domain
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.hostname.includes("onrender.com")) {
+      return res.redirect(301, "https://www.mecalus.org" + req.originalUrl);
+    }
+    next();
+  });
+}
+
 // Serve React frontend in production
 if (process.env.NODE_ENV === 'production') {
   const distPath = path.join(__dirname, '../frontend/dist');
