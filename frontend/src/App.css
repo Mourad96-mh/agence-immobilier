@@ -94,8 +94,8 @@ a {
 /* Topbar */
 .topbar {
   height: var(--topbar-h);
-  background: #07152a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: #f59e0b;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
 }
@@ -117,12 +117,12 @@ a {
   align-items: center;
   gap: 5px;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.65);
   transition: color var(--transition);
 }
 
 .topbar-left a:hover {
-  color: var(--accent);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .topbar-right {
@@ -131,14 +131,14 @@ a {
 }
 
 .topbar-right a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.6);
   transition: color var(--transition);
   display: flex;
   align-items: center;
 }
 
 .topbar-right a:hover {
-  color: var(--accent);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 /* Main nav */
