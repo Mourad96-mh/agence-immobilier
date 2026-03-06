@@ -14,7 +14,7 @@ export default function VendrePage() {
   useSEO({
     title: 'Vendre votre bien immobilier à Marrakech & Casablanca | Mecalus',
     description: "Vendez votre appartement, villa, maison ou terrain rapidement et au meilleur prix. Mecalus vous accompagne à Marrakech et Casablanca avec une expertise locale reconnue. Estimation gratuite.",
-    canonical: 'https://mecalus.org/vendre',
+    canonical: 'https://www.mecalus.org/vendre',
   })
   const { t } = useLanguage()
   const { showToast } = useToast()

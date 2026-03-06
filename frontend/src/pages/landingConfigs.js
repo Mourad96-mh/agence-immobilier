@@ -41,7 +41,7 @@ export const LANDING_PAGES = [
     seo: {
       title: "Appartement à vendre Casablanca — Mecalus Immobilier",
       description: "Trouvez votre appartement à vendre à Casablanca : Maarif, Anfa, Gauthier, CIL... Annonces vérifiées, prix transparents. Contactez Mecalus.",
-      canonical: "https://mecalus.org/acheter-appartement-casablanca",
+      canonical: "https://www.mecalus.org/acheter-appartement-casablanca",
       keywords: "appartement à vendre casablanca, achat appartement casablanca, immobilier casablanca",
     },
     hero: {
@@ -57,7 +57,7 @@ export const LANDING_PAGES = [
     seo: {
       title: "Villa à vendre Marrakech — Mecalus Immobilier",
       description: "Villas à vendre à Marrakech : Palmeraie, Hivernage, Agdal, Route de Fès... Découvrez nos offres exclusives. Mecalus, votre agence de confiance.",
-      canonical: "https://mecalus.org/acheter-villa-marrakech",
+      canonical: "https://www.mecalus.org/acheter-villa-marrakech",
       keywords: "villa à vendre marrakech, achat villa marrakech, immobilier marrakech",
     },
     hero: {
@@ -73,7 +73,7 @@ export const LANDING_PAGES = [
     seo: {
       title: "Appartement à vendre Marrakech — Mecalus Immobilier",
       description: "Appartements à vendre à Marrakech : Guéliz, Agdal, Médina, Massira... Annonces vérifiées, accompagnement personnalisé. Mecalus Immobilier.",
-      canonical: "https://mecalus.org/acheter-appartement-marrakech",
+      canonical: "https://www.mecalus.org/acheter-appartement-marrakech",
       keywords: "appartement à vendre marrakech, achat appartement marrakech, immobilier marrakech",
     },
     hero: {
@@ -89,7 +89,7 @@ export const LANDING_PAGES = [
     seo: {
       title: "Appartement à louer Casablanca — Mecalus Immobilier",
       description: "Location appartement Casablanca : Maarif, Anfa, Gauthier, Racine... Biens vérifiés, loyers transparents. Trouvez votre logement avec Mecalus.",
-      canonical: "https://mecalus.org/louer-appartement-casablanca",
+      canonical: "https://www.mecalus.org/louer-appartement-casablanca",
       keywords: "appartement à louer casablanca, location appartement casablanca, louer casablanca",
     },
     hero: {
@@ -105,7 +105,7 @@ export const LANDING_PAGES = [
     seo: {
       title: "Appartement à louer Marrakech — Mecalus Immobilier",
       description: "Location appartement Marrakech : Guéliz, Agdal, Médina, Hivernage... Annonces fiables, accompagnement complet. Mecalus Immobilier.",
-      canonical: "https://mecalus.org/louer-appartement-marrakech",
+      canonical: "https://www.mecalus.org/louer-appartement-marrakech",
       keywords: "appartement à louer marrakech, location appartement marrakech, louer marrakech",
     },
     hero: {
@@ -121,7 +121,7 @@ export const LANDING_PAGES = [
     seo: {
       title: "Villa à louer Marrakech — Mecalus Immobilier",
       description: "Villas à louer à Marrakech : Palmeraie, Hivernage, Route de Fès... Locations saisonnières et longue durée. Mecalus, votre agence locale.",
-      canonical: "https://mecalus.org/louer-villa-marrakech",
+      canonical: "https://www.mecalus.org/louer-villa-marrakech",
       keywords: "villa à louer marrakech, location villa marrakech, villa marrakech",
     },
     hero: {

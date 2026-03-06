@@ -14,7 +14,7 @@ export default function MettreEnLocationPage() {
   useSEO({
     title: 'Mettre en location votre bien immobilier | Gestion locative Marrakech & Casablanca | Mecalus',
     description: "Confiez la gestion locative de votre bien à Mecalus. Mise en location rapide et suivi professionnel à Marrakech et Casablanca. Réponse sous 24h.",
-    canonical: 'https://mecalus.org/mettre-en-location',
+    canonical: 'https://www.mecalus.org/mettre-en-location',
   })
   const { t } = useLanguage()
   const { showToast } = useToast()
