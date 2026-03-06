@@ -229,14 +229,17 @@ export default function PropertyFormModal({ property, onClose, onSaved }) {
             </div>
             <div className="modal-field">
               <label>Quartier</label>
-              <select
+              <input
+                type="text"
+                list="quartier-list"
                 value={form.quartier}
                 onChange={(e) => set('quartier', e.target.value)}
                 disabled={!form.city}
-              >
-                <option value="">— Choisir —</option>
-                {(QUARTIERS[form.city] || []).map((q) => <option key={q} value={q}>{q}</option>)}
-              </select>
+                placeholder={form.city ? 'Choisir ou saisir…' : "Choisir une ville d'abord"}
+              />
+              <datalist id="quartier-list">
+                {(QUARTIERS[form.city] || []).map((q) => <option key={q} value={q} />)}
+              </datalist>
             </div>
           </div>
           <div className="modal-field">
