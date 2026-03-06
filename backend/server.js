@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
@@ -42,9 +42,7 @@ if (process.env.NODE_ENV === "production") {
       // Serve a blocking robots.txt so Googlebot knows not to index onrender.com URLs
       if (req.path === "/robots.txt") {
         res.type("text/plain");
-        return res.send("User-agent: *
-Disallow: /
-");
+        return res.send(["User-agent: *", "Disallow: /", ""].join("\n"));
       }
       return res.redirect(301, "https://www.mecalus.org" + req.originalUrl);
     }
