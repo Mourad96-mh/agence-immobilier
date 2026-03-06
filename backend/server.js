@@ -39,6 +39,13 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
     if (req.hostname.includes("onrender.com")) {
+      // Serve a blocking robots.txt so Googlebot knows not to index onrender.com URLs
+      if (req.path === "/robots.txt") {
+        res.type("text/plain");
+        return res.send("User-agent: *
+Disallow: /
+");
+      }
       return res.redirect(301, "https://www.mecalus.org" + req.originalUrl);
     }
     next();
