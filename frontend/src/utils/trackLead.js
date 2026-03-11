@@ -12,7 +12,7 @@
 const ADS_CONVERSION_ID = "AW-17548598231";
 
 // REPLACE HERE: Google Ads Conversion Label (e.g. 'AbCdEfGhIjKlMnOp')
-const ADS_CONVERSION_LABEL = "REPLACE_HERE";
+const ADS_CONVERSION_LABEL = "DdZtCJK7wYYcENe36a9B";
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbweZeFuJfgiB5fBhkG3vAAl0EY9EjwqTxM5hJYNy0mg7xdTmIHvVNnWQN-HsDpwp-CG8g/exec";
