@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { MapPin, Maximize2, BedDouble, Bath, Phone, Heart, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
+import { trackPropertyLead } from '../utils/trackLead'
 
 export default function PropertyCard({ property, onSelect }) {
   const { lang, t } = useLanguage()
@@ -159,7 +160,7 @@ export default function PropertyCard({ property, onSelect }) {
             <a
               href={`tel:${AGENCY.phone}`}
               className="btn-call"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); trackPropertyLead(property, 'phone') }}
               title="Appeler"
             >
               <Phone size={14} />
@@ -170,7 +171,7 @@ export default function PropertyCard({ property, onSelect }) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp-card"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); trackPropertyLead(property, 'whatsapp') }}
               title="WhatsApp"
             >
               WhatsApp

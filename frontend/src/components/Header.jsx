@@ -4,6 +4,7 @@ import { Phone, Mail, MessageCircle, Menu, X } from 'lucide-react'
 import logo from '../images/logo.svg'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
+import { trackLead } from '../utils/trackLead'
 
 const LANGS = [
   { code: 'fr', label: 'FR' },
@@ -35,11 +36,11 @@ export default function Header() {
       <div className="topbar">
         <div className="container topbar-inner">
           <div className="topbar-left">
-            <a href={`tel:${AGENCY.phone}`}>
+            <a href={`tel:${AGENCY.phone}`} onClick={() => trackLead({ source: 'header-topbar' }, 'phone')}>
               <Phone size={12} />
               {AGENCY.phoneDisplay}
             </a>
-            <a href={`https://wa.me/${AGENCY.whatsapp}`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://wa.me/${AGENCY.whatsapp}`} target="_blank" rel="noopener noreferrer" onClick={() => trackLead({ source: 'header-topbar' }, 'whatsapp')}>
               <MessageCircle size={12} />
               {AGENCY.whatsappDisplay}
             </a>
@@ -147,10 +148,10 @@ export default function Header() {
                   </button>
                 ))}
               </div>
-              <a href={`tel:${AGENCY.phone}`} className="mobile-menu-contact">
+              <a href={`tel:${AGENCY.phone}`} className="mobile-menu-contact" onClick={() => trackLead({ source: 'header-mobile-menu' }, 'phone')}>
                 <Phone size={14} /> {AGENCY.phoneDisplay}
               </a>
-              <a href={`https://wa.me/${AGENCY.whatsapp}`} className="mobile-menu-contact" target="_blank" rel="noopener noreferrer">
+              <a href={`https://wa.me/${AGENCY.whatsapp}`} className="mobile-menu-contact" target="_blank" rel="noopener noreferrer" onClick={() => trackLead({ source: 'header-mobile-menu' }, 'whatsapp')}>
                 <MessageCircle size={14} /> {AGENCY.whatsappDisplay}
               </a>
             </div>

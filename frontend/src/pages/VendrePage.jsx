@@ -7,6 +7,7 @@ import ContactSection from '../components/ContactSection'
 import { useLanguage } from '../context/LanguageContext'
 import { useToast } from '../context/ToastContext'
 import { AGENCY } from '../config'
+import { trackLead } from '../utils/trackLead'
 
 const EMPTY_FORM = { type: '', city: '', area: '', name: '', phone: '', email: '', notes: '' }
 
@@ -36,6 +37,7 @@ export default function VendrePage() {
     const msg = encodeURIComponent(
       `Bonjour Mecalus 👋\n\nJe souhaite *vendre mon bien* :\n\n🏠 Type : ${form.type}\n📍 Ville : ${form.city}\n📐 Surface : ${form.area} m²\n📝 ${form.notes}\n\n👤 ${form.name}\n📞 ${form.phone}\n✉️ ${form.email}`
     )
+    trackLead({ source: 'vendre-form', category: form.type, city: form.city }, 'form')
     window.open(`https://wa.me/${AGENCY.whatsapp}?text=${msg}`, '_blank')
     setForm(EMPTY_FORM)
     fetch('/api/leads', {

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { TrendingUp, CheckCircle } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
+import { trackLead } from '../utils/trackLead'
 
 const CATEGORIES = ['apartment', 'villa', 'office', 'land', 'commercial']
 const CITIES = [
@@ -23,6 +24,7 @@ export default function EstimateSection() {
     const msg = encodeURIComponent(
       `Bonjour Mecalus 👋\n\nJe souhaite une *estimation gratuite* pour :\n\n🏠 Type : ${form.type}\n📍 Ville : ${form.city}\n📐 Surface : ${form.area} m²\n🛏 Pièces : ${form.rooms || '—'}\n✨ État : ${form.condition}\n\n👤 ${form.name}\n📞 ${form.phone}\n✉️ ${form.email}`
     )
+    trackLead({ source: 'estimate-form', category: form.type, city: form.city }, 'form')
     window.open(`https://wa.me/${AGENCY.whatsapp}?text=${msg}`, '_blank')
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 4000)

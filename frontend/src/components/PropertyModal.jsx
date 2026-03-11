@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { X, MapPin, Maximize2, BedDouble, Bath, Phone, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
+import { trackPropertyLead } from '../utils/trackLead'
 
 export default function PropertyModal({ property, onClose }) {
   const { lang, t } = useLanguage()
@@ -163,7 +164,11 @@ export default function PropertyModal({ property, onClose }) {
           )}
 
           <div className="modal-actions">
-            <a href={`tel:${AGENCY.phone}`} className="modal-btn modal-btn-call">
+            <a
+              href={`tel:${AGENCY.phone}`}
+              className="modal-btn modal-btn-call"
+              onClick={() => trackPropertyLead(property, 'phone')}
+            >
               <Phone size={16} />
               {t('card.call')} — {AGENCY.phoneDisplay}
             </a>
@@ -172,6 +177,7 @@ export default function PropertyModal({ property, onClose }) {
               target="_blank"
               rel="noopener noreferrer"
               className="modal-btn modal-btn-wa"
+              onClick={() => trackPropertyLead(property, 'whatsapp')}
             >
               <MessageCircle size={16} />
               WhatsApp

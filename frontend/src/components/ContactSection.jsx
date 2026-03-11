@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import { useToast } from '../context/ToastContext'
 import { AGENCY } from '../config'
+import { trackLead } from '../utils/trackLead'
 
 const EMPTY_FORM = { name: '', phone: '', email: '', subject: '', message: '' }
 
@@ -20,6 +21,7 @@ export default function ContactSection() {
     const msg = encodeURIComponent(
       `Bonjour Mecalus,\n\nJe suis *${form.name}*.\n*Sujet:* ${form.subject}\n\n${form.message}\n\n📞 ${form.phone}\n✉️ ${form.email}`
     )
+    trackLead({ source: 'contact-form' }, 'form')
     window.open(`https://wa.me/${AGENCY.whatsapp}?text=${msg}`, '_blank')
     setForm(EMPTY_FORM)
     fetch('/api/leads', {
@@ -102,7 +104,7 @@ export default function ContactSection() {
             <h3 className="contact-info-title">{t('contact.infoTitle')}</h3>
 
             <div className="contact-info-list">
-              <a href={`tel:${AGENCY.phone}`} className="contact-info-item">
+              <a href={`tel:${AGENCY.phone}`} className="contact-info-item" onClick={() => trackLead({ source: 'contact-section' }, 'phone')}>
                 <div className="contact-info-icon">
                   <Phone size={18} />
                 </div>
@@ -117,6 +119,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-info-item"
+                onClick={() => trackLead({ source: 'contact-section' }, 'whatsapp')}
               >
                 <div className="contact-info-icon whatsapp-icon">
                   <MessageCircle size={18} />

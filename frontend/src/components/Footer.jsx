@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
 import logo from '../images/logo.svg'
 import { useLanguage } from '../context/LanguageContext'
 import { AGENCY } from '../config'
+import { trackLead } from '../utils/trackLead'
 
 export default function Footer() {
   const { t } = useLanguage()
@@ -32,11 +33,11 @@ export default function Footer() {
           {/* Contact */}
           <div className="footer-col">
             <h4>{t('footer.contact')}</h4>
-            <a href={`tel:${AGENCY.phone}`}>
+            <a href={`tel:${AGENCY.phone}`} onClick={() => trackLead({ source: 'footer' }, 'phone')}>
               <Phone size={13} />
               {AGENCY.phoneDisplay}
             </a>
-            <a href={`https://wa.me/${AGENCY.whatsapp}`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://wa.me/${AGENCY.whatsapp}`} target="_blank" rel="noopener noreferrer" onClick={() => trackLead({ source: 'footer' }, 'whatsapp')}>
               <MessageCircle size={13} />
               {AGENCY.whatsappDisplay}
             </a>
