@@ -124,4 +124,19 @@ export function trackPropertyLead(property, type) {
     },
     type,
   );
+
+  // Save WhatsApp clicks as leads in the DB
+  if (type === "whatsapp") {
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "whatsapp",
+        subject: `${property.title?.fr || ""} — Réf. ${property.propertyCode || ""}`,
+        city: property.city || "",
+        propertyType: property.category || "",
+        message: `Intérêt WhatsApp pour le bien ${property.propertyCode || ""} à ${property.city || ""}`,
+      }),
+    }).catch(() => {});
+  }
 }

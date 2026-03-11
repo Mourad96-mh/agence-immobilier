@@ -41,8 +41,9 @@ export default function AdminSettings() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || 'Erreur serveur')
       login(data.token)
+      setSuccess('Vos informations ont été mises à jour avec succès.')
       setForm({ currentPassword: '', newEmail: '', newPassword: '', confirmPassword: '' })
-      setTimeout(() => navigate('/admin/properties'), 1000)
+      setTimeout(() => navigate('/admin/properties'), 1500)
     } catch (err) {
       setError(err.message)
     } finally {

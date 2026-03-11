@@ -8,9 +8,11 @@ import PropertyFormModal from './PropertyFormModal'
 const CATEGORY_LABELS = {
   apartment: 'Appartement',
   villa: 'Villa',
+  maison: 'Maison',
   office: 'Bureau',
   land: 'Terrain',
   riad: 'Riad',
+  ferme: 'Ferme',
   commercial: 'Commercial',
 }
 
@@ -54,10 +56,11 @@ export default function AdminProperties() {
 
   const deleteProperty = async (id) => {
     if (!confirm('Supprimer cette propriété définitivement ?')) return
-    await fetch(`/api/properties/${id}`, {
+    const res = await fetch(`/api/properties/${id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` },
     })
+    if (!res.ok) return
     setProperties((prev) => prev.filter((p) => p._id !== id))
   }
 

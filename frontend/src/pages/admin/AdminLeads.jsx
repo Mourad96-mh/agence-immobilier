@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { RefreshCw, Phone, Mail, MessageSquare, Home, Key } from 'lucide-react'
+import { RefreshCw, Phone, Mail, MessageSquare, Home, Key, MessageCircle } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import AdminNav from '../../components/AdminNav'
 
@@ -17,10 +17,7 @@ export default function AdminLeads() {
   const fetchLeads = useCallback(async () => {
     setLoading(true)
     try {
-      const params = new URLSearchParams()
-      if (filters.status) params.append('status', filters.status)
-      if (filters.source) params.append('source', filters.source)
-      const res = await fetch(`/api/leads?${params}`, {
+      const res = await fetch('/api/leads', {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (res.status === 401) { logout(); navigate('/admin/login'); return }
@@ -30,9 +27,15 @@ export default function AdminLeads() {
     } finally {
       setLoading(false)
     }
-  }, [token, filters, logout, navigate])
+  }, [token, logout, navigate])
 
   useEffect(() => { fetchLeads() }, [fetchLeads])
+
+  // Auto-refresh every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(fetchLeads, 30000)
+    return () => clearInterval(interval)
+  }, [fetchLeads])
 
   const updateStatus = async (id, status) => {
     await fetch(`/api/leads/${id}`, {
@@ -45,10 +48,11 @@ export default function AdminLeads() {
 
   const deleteLead = async (id) => {
     if (!confirm('Supprimer ce lead ?')) return
-    await fetch(`/api/leads/${id}`, {
+    const res = await fetch(`/api/leads/${id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` },
     })
+    if (!res.ok) return
     setLeads((prev) => prev.filter((l) => l._id !== id))
   }
 
@@ -60,7 +64,14 @@ export default function AdminLeads() {
     contact: leads.filter((l) => l.source === 'contact').length,
     vendre: leads.filter((l) => l.source === 'vendre').length,
     location: leads.filter((l) => l.source === 'location').length,
+    whatsapp: leads.filter((l) => l.source === 'whatsapp').length,
   }
+
+  const filteredLeads = leads.filter((l) => {
+    if (filters.status && l.status !== filters.status) return false
+    if (filters.source && l.source !== filters.source) return false
+    return true
+  })
 
   return (
     <div className="admin-page">
@@ -107,6 +118,10 @@ export default function AdminLeads() {
           <span className="admin-stat-number">{counts.location}</span>
           <span className="admin-stat-label">Mettre en location</span>
         </div>
+        <div className="admin-stat-card new">
+          <span className="admin-stat-number">{counts.whatsapp}</span>
+          <span className="admin-stat-label">WhatsApp</span>
+        </div>
       </div>
 
       {/* Filters */}
@@ -130,13 +145,14 @@ export default function AdminLeads() {
           <option value="contact">Contact</option>
           <option value="vendre">Vendre</option>
           <option value="location">Mettre en location</option>
+          <option value="whatsapp">WhatsApp</option>
         </select>
       </div>
 
       {/* Table */}
       {loading ? (
         <div className="admin-loading">Chargement...</div>
-      ) : leads.length === 0 ? (
+      ) : filteredLeads.length === 0 ? (
         <div className="admin-empty">Aucun lead trouvé.</div>
       ) : (
         <div className="admin-table-wrapper">
@@ -153,14 +169,15 @@ export default function AdminLeads() {
               </tr>
             </thead>
             <tbody>
-              {leads.map((lead) => (
+              {filteredLeads.map((lead) => (
                 <tr key={lead._id}>
                   <td>
                     <span className={`admin-source-badge ${lead.source}`}>
                       {lead.source === 'contact'   && <><MessageSquare size={12} /> Contact</>}
                       {lead.source === 'vendre'    && <><Home size={12} /> Vendre</>}
                       {lead.source === 'location'  && <><Key size={12} /> Location</>}
-                      {!['contact', 'vendre', 'location'].includes(lead.source) && lead.source}
+                      {lead.source === 'whatsapp'  && <><MessageCircle size={12} /> WhatsApp</>}
+                      {!['contact', 'vendre', 'location', 'whatsapp'].includes(lead.source) && lead.source}
                     </span>
                   </td>
                   <td className="admin-td-name">{lead.name}</td>
@@ -182,6 +199,8 @@ export default function AdminLeads() {
                         {lead.propertyType} — {lead.city}
                         {lead.area ? `, ${lead.area} m²` : ''}
                       </span>
+                    ) : lead.source === 'whatsapp' ? (
+                      <span title={lead.message}>{lead.subject}</span>
                     ) : (
                       <span title={lead.message}>{lead.subject}</span>
                     )}

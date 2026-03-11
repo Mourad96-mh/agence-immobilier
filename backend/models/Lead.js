@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const leadSchema = new mongoose.Schema(
   {
-    source: { type: String, enum: ['contact', 'vendre', 'location'], required: true },
-    name: { type: String, required: true },
-    phone: { type: String, required: true },
+    source: { type: String, enum: ['contact', 'vendre', 'location', 'whatsapp'], required: true },
+    name: { type: String, default: '' },
+    phone: { type: String, default: '' },
     email: { type: String, default: '' },
     // Contact-specific
     subject: { type: String, default: '' },
