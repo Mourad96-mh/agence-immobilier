@@ -126,10 +126,12 @@ export function trackPropertyLead(property, type) {
   );
 
   // Save WhatsApp clicks as leads in the DB
+  // keepalive: true ensures the request completes even if the browser navigates away (e.g. opening WhatsApp app on mobile)
   if (type === "whatsapp") {
     fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      keepalive: true,
       body: JSON.stringify({
         source: "whatsapp",
         subject: `${property.title?.fr || ""} — Réf. ${property.propertyCode || ""}`,
