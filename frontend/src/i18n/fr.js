@@ -32,7 +32,7 @@ export default {
     },
   },
   hero: {
-    title: 'Agence Immobilière à Marrakech & Casablanca',
+    title: 'Mecalus - La plateforme immobilière pour acheter, vendre et investir au Casablanca & Marrakech.',
     subtitle: 'Achetez, vendez ou louez votre bien — appartements, villas, maisons et terrains à Marrakech et Casablanca',
     searchPlaceholder: 'Rechercher par ville, quartier…',
     search: 'Rechercher',

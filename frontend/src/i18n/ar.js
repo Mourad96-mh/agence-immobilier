@@ -32,7 +32,7 @@ export default {
     },
   },
   hero: {
-    title: 'وكالة عقارية في مراكش والدار البيضاء',
+    title: 'Mecalus - La plateforme immobilière pour acheter, vendre et investir au Casablanca & Marrakech.',
     subtitle: 'اشترِ أو بِع أو استأجر عقارك — شقق، فيلات، منازل وأراضي في مراكش والدار البيضاء',
     searchPlaceholder: 'ابحث بالمدينة أو الحي…',
     search: 'بحث',
