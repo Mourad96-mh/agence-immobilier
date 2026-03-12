@@ -53,6 +53,22 @@ export const LANDING_PAGES = [
     faq: FAQ_ACHETER,
   },
   {
+    path: "/acheter-villa-casablanca",
+    seo: {
+      title: "Villa à vendre Casablanca — Mecalus Immobilier",
+      description: "Villas à vendre à Casablanca : Ain Diab, Anfa, Californie, Sidi Maarouf... Découvrez nos offres exclusives. Mecalus, votre agence de confiance.",
+      canonical: "https://www.mecalus.org/acheter-villa-casablanca",
+      keywords: "villa à vendre casablanca, achat villa casablanca, immobilier casablanca",
+    },
+    hero: {
+      title: "Villas à vendre à Casablanca",
+      subtitle: "Ain Diab, Anfa, Californie, Sidi Maarouf — prestige et modernité au bord de l'Atlantique",
+    },
+    intro: "Vous souhaitez acquérir une villa à Casablanca ? Mecalus vous propose une sélection exclusive de villas à vendre dans les quartiers résidentiels les plus prisés de la métropole : Ain Diab, Anfa, Californie, Sidi Maarouf et les Coteaux. Piscine, jardin, vue mer ou cadre verdoyant : nos conseillers locaux vous accompagnent de la première visite jusqu'à la signature chez le notaire.",
+    defaultFilters: { category: "villa", transactionType: "sale", city: "Casablanca" },
+    faq: FAQ_ACHETER,
+  },
+  {
     path: "/acheter-villa-marrakech",
     seo: {
       title: "Villa à vendre Marrakech — Mecalus Immobilier",
