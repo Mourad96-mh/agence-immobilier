@@ -6,6 +6,7 @@ function applyFilters(data, filters) {
     if (filters.category && p.category !== filters.category) return false
     if (filters.transactionType && p.transactionType !== filters.transactionType) return false
     if (filters.city && p.city !== filters.city) return false
+    if (filters.quartier && p.quartier !== filters.quartier) return false
     if (filters.minPrice && p.price < Number(filters.minPrice)) return false
     if (filters.maxPrice && p.price > Number(filters.maxPrice)) return false
     if (filters.minRooms && p.rooms < Number(filters.minRooms)) return false

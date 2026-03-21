@@ -58,6 +58,8 @@ export default {
     sale: 'للبيع',
     rent: 'للإيجار',
     allCities: 'جميع المدن',
+    quartier: 'الحي',
+    allQuartiers: 'جميع الأحياء',
     results: 'نتيجة',
     noResults: 'لم يتم العثور على عقارات',
     noResultsHint: 'حاول تغيير معايير البحث',

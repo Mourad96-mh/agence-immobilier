@@ -58,6 +58,8 @@ export default {
     sale: 'For Sale',
     rent: 'For Rent',
     allCities: 'All Cities',
+    quartier: 'Neighbourhood',
+    allQuartiers: 'All neighbourhoods',
     results: 'results',
     noResults: 'No properties found',
     noResultsHint: 'Try adjusting your filters',

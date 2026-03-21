@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -9,18 +9,33 @@ const CITIES = ['Marrakech', 'Casablanca']
 export default function FilterBar({ filters, onFiltersChange, total }) {
   const { t } = useLanguage()
   const [open, setOpen] = useState(false)
+  const [quartiers, setQuartiers] = useState([])
 
-  const set = (key, value) => onFiltersChange((prev) => ({ ...prev, [key]: value }))
+  useEffect(() => {
+    if (!filters.city) { setQuartiers([]); return }
+    fetch(`/api/properties/quartiers?city=${encodeURIComponent(filters.city)}`)
+      .then((r) => r.json())
+      .then((data) => setQuartiers(Array.isArray(data) ? data : []))
+      .catch(() => setQuartiers([]))
+  }, [filters.city])
+
+  const set = (key, value) => {
+    if (key === 'city') {
+      onFiltersChange((prev) => ({ ...prev, city: value, quartier: '' }))
+    } else {
+      onFiltersChange((prev) => ({ ...prev, [key]: value }))
+    }
+  }
 
   const reset = () => {
     onFiltersChange({
-      category: '', transactionType: '', city: '',
+      category: '', transactionType: '', city: '', quartier: '',
       minPrice: '', maxPrice: '', search: '', minRooms: '',
     })
   }
 
   const activeCount = [
-    filters.category, filters.transactionType, filters.city,
+    filters.category, filters.transactionType, filters.city, filters.quartier,
     filters.minPrice, filters.maxPrice, filters.minRooms,
   ].filter(Boolean).length
 
@@ -69,6 +84,18 @@ export default function FilterBar({ filters, onFiltersChange, total }) {
           ))}
         </select>
       </div>
+
+      {filters.city && quartiers.length > 0 && (
+        <div className="filter-group">
+          <span className="filter-label">{t('filters.quartier')}</span>
+          <select value={filters.quartier || ''} onChange={(e) => set('quartier', e.target.value)} className="filter-select">
+            <option value="">{t('filters.allQuartiers')}</option>
+            {quartiers.map((q) => (
+              <option key={q} value={q}>{q}</option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div className="filter-group">
         <span className="filter-label">{t('filters.minPrice')}</span>

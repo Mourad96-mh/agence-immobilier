@@ -24,6 +24,7 @@ export default function AcheterPage() {
     category: searchParams.get('category') || '',
     transactionType: 'sale',
     city: searchParams.get('city') || '',
+    quartier: searchParams.get('quartier') || '',
     minPrice: searchParams.get('minPrice') || '',
     maxPrice: searchParams.get('maxPrice') || '',
     search: searchParams.get('search') || '',
@@ -37,6 +38,7 @@ export default function AcheterPage() {
     const params = {}
     if (newFilters.category) params.category = newFilters.category
     if (newFilters.city) params.city = newFilters.city
+    if (newFilters.quartier) params.quartier = newFilters.quartier
     if (newFilters.minPrice) params.minPrice = newFilters.minPrice
     if (newFilters.maxPrice) params.maxPrice = newFilters.maxPrice
     if (newFilters.minRooms) params.minRooms = newFilters.minRooms

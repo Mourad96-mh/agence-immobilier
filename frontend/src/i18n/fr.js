@@ -58,6 +58,8 @@ export default {
     sale: 'À Vendre',
     rent: 'À Louer',
     allCities: 'Toutes les villes',
+    quartier: 'Quartier',
+    allQuartiers: 'Tous les quartiers',
     results: 'résultats',
     noResults: 'Aucune propriété trouvée',
     noResultsHint: 'Essayez de modifier vos filtres',

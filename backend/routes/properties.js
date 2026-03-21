@@ -62,6 +62,7 @@ router.get("/", optionalAuth, async (req, res) => {
       category,
       transactionType,
       city,
+      quartier,
       minPrice,
       maxPrice,
       minRooms,
@@ -78,6 +79,7 @@ router.get("/", optionalAuth, async (req, res) => {
     if (category) query.category = category;
     if (transactionType) query.transactionType = transactionType;
     if (city) query.city = city;
+    if (quartier) query.quartier = quartier;
     if (minRooms) query.rooms = { $gte: Number(minRooms) };
 
     if (minPrice || maxPrice) {
@@ -99,6 +101,19 @@ router.get("/", optionalAuth, async (req, res) => {
       createdAt: -1,
     });
     res.json(properties);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET /api/properties/quartiers?city=Casablanca
+router.get("/quartiers", async (req, res) => {
+  try {
+    const { city } = req.query;
+    const match = { isAvailable: true, quartier: { $nin: ['', null] } };
+    if (city) match.city = city;
+    const quartiers = await Property.distinct("quartier", match);
+    res.json(quartiers.filter(Boolean).sort());
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

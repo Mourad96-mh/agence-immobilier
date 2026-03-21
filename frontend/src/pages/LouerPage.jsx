@@ -23,6 +23,7 @@ export default function LouerPage() {
     category: searchParams.get('category') || '',
     transactionType: 'rent',
     city: searchParams.get('city') || '',
+    quartier: searchParams.get('quartier') || '',
     minPrice: searchParams.get('minPrice') || '',
     maxPrice: searchParams.get('maxPrice') || '',
     search: searchParams.get('search') || '',
@@ -36,6 +37,7 @@ export default function LouerPage() {
     const params = {}
     if (newFilters.category) params.category = newFilters.category
     if (newFilters.city) params.city = newFilters.city
+    if (newFilters.quartier) params.quartier = newFilters.quartier
     if (newFilters.minPrice) params.minPrice = newFilters.minPrice
     if (newFilters.maxPrice) params.maxPrice = newFilters.maxPrice
     if (newFilters.minRooms) params.minRooms = newFilters.minRooms
