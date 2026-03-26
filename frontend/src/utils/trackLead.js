@@ -15,7 +15,7 @@ const ADS_CONVERSION_ID = "AW-17548598231";
 const ADS_CONVERSION_LABEL = "DdZtCJK7wYYcENe36a9B";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbweZeFuJfgiB5fBhkG3vAAl0EY9EjwqTxM5hJYNy0mg7xdTmIHvVNnWQN-HsDpwp-CG8g/exec";
+  "https://script.google.com/macros/s/AKfycbzRlPeTUCjDvoG1x1RDbnbiYOQ5Z4HTzjl_lVkyZUHssAK4qDuOhtyMeXtlUf__0e0GWw/exec";
 
 // ─── DEBUG MODE (remove before production) ───────────────────────────────────
 const DEBUG = false;
